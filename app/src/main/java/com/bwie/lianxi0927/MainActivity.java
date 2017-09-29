@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements LoginView,ZhuceVi
                 if(file!=null) {
                     String filename = file.getName();
                     Map<String, Object> params = new HashMap<>();
-                    params.put("mobile", "15297526557");
+                    params.put("mobile", "18801070392");
                     OkHttpClient okHttpClient = new OkHttpClient();
                     MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
                     RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
