@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bwie.lianxi0927.QidongActivity">
+
+    <ImageView
+        android:id="@+id/jing"
+        android:scaleType="centerCrop"
+        android:src="@drawable/jingdong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

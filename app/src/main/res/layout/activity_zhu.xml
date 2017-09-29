@@ -12,105 +12,87 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="50sp"></FrameLayout>
     <LinearLayout
-        android:id="@+id/ll"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50sp">
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:id="@+id/lnearLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <LinearLayout
-            android:id="@+id/ll_shouye"
-            android:layout_weight="1"
+            android:id="@+id/m_shouye"
+            android:gravity="center"
+            android:layout_width="0dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
             <ImageView
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/iv_shouye"
+                android:id="@+id/img_shouye"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/shouye1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/tv_shouye"
-                android:text="首页"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/ll_fenlei"
-            android:layout_weight="1"
+            android:id="@+id/m_fenlei"
+            android:gravity="center"
+            android:layout_width="0dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
             <ImageView
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/iv_fenlei"
-                android:src="@drawable/fenlei1"
+                android:id="@+id/img_fenlei"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/tv_fenlei"
-                android:text="分类"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:src="@drawable/fenlei1" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/ll_faxian"
-            android:layout_weight="1"
+            android:id="@+id/m_faxian"
+            android:gravity="center"
+            android:layout_width="0dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
             <ImageView
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/iv_faxian"
+                android:id="@+id/img_faxian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/faxian1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/tv_faxian"
-                android:text="发现"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/ll_gouwuche"
-            android:layout_weight="1"
+            android:id="@+id/m_gouwu"
+            android:gravity="center"
+            android:layout_width="0dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
             <ImageView
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/iv_gouwuche"
+                android:id="@+id/img_gouwu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/gouwuche1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/tv_gouwuche"
-                android:text="购物车"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/ll_wode"
-            android:layout_weight="1"
+            android:id="@+id/m_wode"
+            android:gravity="center"
+            android:layout_width="0dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
             <ImageView
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/iv_wode"
-                android:src="@drawable/wode1"
+                android:id="@+id/img_wode"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/tv_wode"
-                android:text="我的"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:src="@drawable/wode1" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
