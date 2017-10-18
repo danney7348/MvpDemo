@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="5sp"
+    android:layout_height="match_parent">
+<ImageView
+    android:id="@+id/iv_pro_img2"
+    android:layout_width="wrap_content"
+    android:scaleType="centerCrop"
+    android:src="@mipmap/ic_launcher"
+    android:layout_height="200sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:text="sssss"
+            android:textSize="15sp"
+            android:textColor="#333333"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:id="@+id/tv_pro_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="sssss"
+            android:textSize="15sp"
+            android:textColor="#ff0000"
+            android:id="@+id/tv_pro_price2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_xiaol2"
+            android:text="ssssssss"
+            android:textColor="#666666"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

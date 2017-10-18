@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bwie.lianxi0927.ZhanghuShezhiActivity">
+<LinearLayout
+    android:id="@+id/lllll"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_back"
+        android:src="@mipmap/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_zhanghushezhi"
+        android:textSize="20sp"
+        android:text="账户设置"
+        android:layout_marginLeft="150sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/lllll"
+        android:id="@+id/ll_usericon"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@mipmap/ic_launcher_round"
+            android:scaleType="centerCrop"
+            android:id="@+id/iv_usericon"
+            android:layout_width="45sp"
+            android:layout_height="45sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_tuichu"
+        android:text="退出"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

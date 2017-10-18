@@ -11,7 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bwie.lianxi0927.fragment.FenleiFragment;
 import com.bwie.lianxi0927.fragment.ShouyeFragment;
+import com.bwie.lianxi0927.fragment.WodeFragment;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -33,7 +35,7 @@ public class ZhuActivity extends AppCompatActivity implements View.OnClickListen
         img_gouwu.setImageResource(R.drawable.gouwuche1);
         img_wode.setImageResource(R.drawable.wode1);
         img_fenlei.setImageResource(R.drawable.fenlei1);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment( )).commit();
     }
 
 
@@ -53,7 +55,7 @@ public class ZhuActivity extends AppCompatActivity implements View.OnClickListen
         img_wode = (ImageView) findViewById(R.id.img_wode);
         img_fenlei = (ImageView) findViewById(R.id.img_fenlei);
         img_gouwu = (ImageView) findViewById(R.id.img_gouwu);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment( )).commit();
     }
     @Override
     public void onClick(View view) {
@@ -64,7 +66,7 @@ public class ZhuActivity extends AppCompatActivity implements View.OnClickListen
                 img_gouwu.setImageResource(R.drawable.gouwuche1);
                 img_wode.setImageResource(R.drawable.wode1);
                 img_fenlei.setImageResource(R.drawable.fenlei1);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment( )).commit();
                 break;
             case  R.id.m_fenlei:
                 img_shouye.setImageResource(R.drawable.shouye1);
@@ -72,7 +74,7 @@ public class ZhuActivity extends AppCompatActivity implements View.OnClickListen
                 img_gouwu.setImageResource(R.drawable.gouwuche1);
                 img_wode.setImageResource(R.drawable.wode1);
                 img_fenlei.setImageResource(R.drawable.fenlei2);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl,new FenleiFragment()).commit();
                 break;
             case R.id.m_faxian:
                 img_shouye.setImageResource(R.drawable.shouye1);
@@ -80,7 +82,7 @@ public class ZhuActivity extends AppCompatActivity implements View.OnClickListen
                 img_gouwu.setImageResource(R.drawable.gouwuche1);
                 img_wode.setImageResource(R.drawable.wode1);
                 img_fenlei.setImageResource(R.drawable.fenlei1);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment( )).commit();
                 break;
             case  R.id.m_gouwu:
                 img_shouye.setImageResource(R.drawable.shouye1);
@@ -88,7 +90,7 @@ public class ZhuActivity extends AppCompatActivity implements View.OnClickListen
                 img_gouwu.setImageResource(R.drawable.gouwuche2);
                 img_wode.setImageResource(R.drawable.wode1);
                 img_fenlei.setImageResource(R.drawable.fenlei1);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment( )).commit();
                 break;
             case R.id.m_wode:
                 img_shouye.setImageResource(R.drawable.shouye1);
@@ -96,7 +98,7 @@ public class ZhuActivity extends AppCompatActivity implements View.OnClickListen
                 img_gouwu.setImageResource(R.drawable.gouwuche1);
                 img_wode.setImageResource(R.drawable.wode2);
                 img_fenlei.setImageResource(R.drawable.fenlei1);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl,new WodeFragment()).commit();
                 break;
         }
     }

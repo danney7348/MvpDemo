@@ -1,5 +1,6 @@
 package com.bwie.lianxi0927.model;
 
+import android.content.Context;
 import android.widget.Toast;
 
 import com.bwie.lianxi0927.bean.Users;
@@ -24,8 +25,9 @@ import static com.bwie.lianxi0927.common.Api.LOGIN_API;
  */
 
 public class LoginModel {
-    public void login(String mobile,String pwd){
+    private Context context;
 
+    public void login(String mobile,String pwd){
         OkHttpClient client = new OkHttpClient();
         FormBody.Builder builder = new FormBody.Builder();
         builder.add("mobile",mobile);
@@ -47,8 +49,10 @@ public class LoginModel {
                     Users users = gson.fromJson(result, Users.class);
                     String code = users.getCode();
                     String msg = users.getMsg();
+                    Users.DataBean data = users.getData();
+                    int uid = data.getUid();
                     if(code.equals("0")){
-                        iLogin.loginSuccess(code,msg);
+                        iLogin.loginSuccess(code,uid);
                     }else {
                         iLogin.loginFail(code,msg);
                     }
@@ -64,7 +68,7 @@ public class LoginModel {
     }
 
     public interface ILogin{
-        void loginSuccess(String code,String msg);
+        void loginSuccess(String code,int msg);
         void loginFail(String code,String msg);
         void failure(Call call, IOException e);
     }

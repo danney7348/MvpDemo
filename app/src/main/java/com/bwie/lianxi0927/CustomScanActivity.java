@@ -33,7 +33,6 @@ public class CustomScanActivity extends AppCompatActivity implements DecoratedBa
         super.onPause();
         captureManager.onPause();
     }
-
     @Override
     protected void onResume() {
         super.onResume();

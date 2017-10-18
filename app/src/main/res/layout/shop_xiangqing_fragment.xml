@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.stx.xhb.xbanner.XBanner
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/xb_banner"
+        app:pointsContainerBackground="#9999"
+        app:pointsPosition="CENTER"
+        app:isAutoPlay="false"
+        android:layout_width="match_parent"
+        android:layout_height="300sp"></com.stx.xhb.xbanner.XBanner>
+    <TextView
+        android:layout_below="@+id/xb_banner"
+        android:id="@+id/tv_xiangqing_title"
+        android:text="sssssssssssss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_below="@+id/tv_xiangqing_title"
+        android:text="ssssssss"
+        android:textColor="#ff0000"
+        android:id="@+id/tv_xiangqing_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

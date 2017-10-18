@@ -21,7 +21,7 @@ public interface LoginView {
 
     void passError(String msg);
 
-    void loginSuccess(String code, String msg);
+    void loginSuccess(String code, int msg);
 
     void loginFail(String code, String msg);
 

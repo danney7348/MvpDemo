@@ -22,7 +22,6 @@ public class LoginPresenter implements LoginModel.ILogin {
     private LoginView loginView;
 
     public LoginPresenter(LoginView loginView) {
-
         this.loginView = loginView;
         loginModel = new LoginModel();
         loginModel.setiLogin(this);
@@ -46,8 +45,7 @@ public class LoginPresenter implements LoginModel.ILogin {
 
 
     @Override
-    public void loginSuccess(String code, String msg) {
-
+    public void loginSuccess(String code, int msg) {
         loginView.loginSuccess(code, msg);
         loginView.hideProgressbar();
 

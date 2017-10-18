@@ -6,6 +6,8 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 /**
  * 作者： 张少丹
@@ -15,9 +17,13 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
  */
 
 public class MyApp extends Application {
+    {
+        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+    }
     @Override
     public void onCreate() {
         super.onCreate();
+        UMShareAPI.get(this);
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .cacheOnDisk(true)
                 .cacheInMemory(true)

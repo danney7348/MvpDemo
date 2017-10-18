@@ -3,6 +3,7 @@ package com.bwie.lianxi0927;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
@@ -15,13 +16,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bwie.lianxi0927.bean.UserLogin;
 import com.bwie.lianxi0927.presenter.LoginPresenter;
 import com.bwie.lianxi0927.presenter.ZhucePresenter;
 import com.bwie.lianxi0927.view.LoginView;
 import com.bwie.lianxi0927.view.ZhuceView;
+import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,11 +61,15 @@ public class MainActivity extends AppCompatActivity implements LoginView,ZhuceVi
     private static final int CROP_SMALL_PICTURE = 2;
     protected static Uri tempUri;
     private ImageView iv_personal_icon;
+    private TextView tv_zhuce;
+    private ImageView iv_qq_login;
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sp = getSharedPreferences("con", MODE_PRIVATE);
         initView();
         initData();
     }
@@ -70,9 +82,17 @@ public class MainActivity extends AppCompatActivity implements LoginView,ZhuceVi
     private void initView() {
         mobile = (EditText) findViewById(R.id.et_mobile);
         pwd = (EditText) findViewById(R.id.et_pwd);
+        tv_zhuce = (TextView) findViewById(R.id.tv_zhuce);
         mProgressbar = (ProgressBar) findViewById(R.id.pb);
         Button btn_change = (Button) findViewById(R.id.btn_change);
         iv_personal_icon = (ImageView) findViewById(R.id.iv_personal_icon);
+        iv_qq_login = (ImageView) findViewById(R.id.iv_qq_login);
+        iv_qq_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UMShareAPI.get(MainActivity.this).getPlatformInfo(MainActivity.this, SHARE_MEDIA.QQ, umAuthListener);
+            }
+        });
         btn_change.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -80,15 +100,24 @@ public class MainActivity extends AppCompatActivity implements LoginView,ZhuceVi
                 showChoosePicDialog();
             }
         });
+        tv_zhuce.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        zhucePresenter.zhuce(mobile.getText().toString(),pwd.getText().toString());
+                    }
+                });
+            }
+        });
     }
-
     private void showChoosePicDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("设置头像");
         String[] items = { "选择本地照片", "拍照" };
         builder.setNegativeButton("取消", null);
         builder.setItems(items, new DialogInterface.OnClickListener() {
-
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
@@ -113,25 +142,37 @@ public class MainActivity extends AppCompatActivity implements LoginView,ZhuceVi
         builder.create().show();
     }
 
+    private UMAuthListener umAuthListener = new UMAuthListener() {
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+            //授权开始的回调
+        }
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+            Toast.makeText(getApplicationContext(), "Authorize succeed", Toast.LENGTH_SHORT).show();
+            //Glide.with(MainActivity.this).load(data.get("iconurl")).into(iv_qq_login);
+
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+            Toast.makeText( getApplicationContext(), "Authorize fail", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform, int action) {
+            Toast.makeText( getApplicationContext(), "Authorize cancel", Toast.LENGTH_SHORT).show();
+        }
+    };
     public void login(View view){
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 loginPresenter.login(mobile.getText().toString(),pwd.getText().toString());
-
             }
         });
 
-    }
-    public void zhuce(View view){
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                zhucePresenter.zhuce(mobile.getText().toString(),pwd.getText().toString());
-            }
-        });
     }
 
     @Override
@@ -179,6 +220,21 @@ public class MainActivity extends AppCompatActivity implements LoginView,ZhuceVi
     }
 
     @Override
+    public void loginSuccess(String code, final int uid) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                sp.edit().putBoolean("isLogin", true).commit();
+                sp.edit().putInt("uid",uid).commit();
+                Intent intent = new Intent(MainActivity.this,ZhuActivity.class);
+                startActivity(intent);
+
+            }
+        });
+    }
+
+    @Override
     public void zhuceSuccess(String code, final String msg) {
         runOnUiThread(new Runnable() {
             @Override
@@ -199,17 +255,6 @@ public class MainActivity extends AppCompatActivity implements LoginView,ZhuceVi
         });
     }
 
-    @Override
-    public void loginSuccess(String code, String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-                startActivity(intent);
-            }
-        });
-
-    }
 
     @Override
     public void loginFail(String code, final String msg) {
@@ -229,6 +274,7 @@ public class MainActivity extends AppCompatActivity implements LoginView,ZhuceVi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) { // 如果返回码是可以用的
             switch (requestCode) {
                 case TAKE_PICTURE:
@@ -282,7 +328,7 @@ public class MainActivity extends AppCompatActivity implements LoginView,ZhuceVi
                 if(file!=null) {
                     String filename = file.getName();
                     Map<String, Object> params = new HashMap<>();
-                    params.put("mobile", "18801070392");
+                    params.put("uid", "15297526557");
                     OkHttpClient okHttpClient = new OkHttpClient();
                     MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
                     RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
@@ -293,7 +339,7 @@ public class MainActivity extends AppCompatActivity implements LoginView,ZhuceVi
                             builder.addFormDataPart(valueOf(entry.getKey()), valueOf(entry.getValue()));
                         }
                     }
-                    Request request = new Request.Builder().url("http://169.254.157.227:8888/user/upload").post(builder.build()).build();
+                    Request request = new Request.Builder().url("http://120.27.23.105/file/upload").post(builder.build()).build();
                     Call call = okHttpClient.newCall(request);
                     call.enqueue(new Callback() {
                         @Override
@@ -328,4 +374,5 @@ public class MainActivity extends AppCompatActivity implements LoginView,ZhuceVi
             // ...
         }
     }*/
+
 }

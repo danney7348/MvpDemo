@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="5sp"
+    android:layout_height="match_parent">
+<ImageView
+    android:id="@+id/iv_pro_img"
+    android:layout_width="100sp"
+    android:scaleType="centerCrop"
+    android:src="@mipmap/ic_launcher"
+    android:layout_height="100sp" />
+    <RelativeLayout
+        android:layout_marginLeft="10sp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="100sp">
+        <TextView
+            android:text="sssss"
+            android:textSize="15sp"
+            android:layout_marginTop="5sp"
+            android:textColor="#333333"
+            android:id="@+id/tv_pro_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="sssss"
+            android:layout_alignParentBottom="true"
+            android:textSize="15sp"
+            android:textColor="#ff0000"
+            android:layout_marginBottom="5sp"
+            android:id="@+id/tv_pro_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_xiaol"
+            android:textColor="#666666"
+            android:text="ssssss"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</LinearLayout>

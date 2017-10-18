@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bwie.lianxi0927.GerenxinxiActivity">
+    <LinearLayout
+        android:id="@+id/lsls"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iiv_back"
+        android:src="@mipmap/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_zhanghushezhi"
+        android:textSize="20sp"
+        android:text="个人信息"
+        android:layout_marginLeft="150sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_below="@+id/lsls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="头像"
+            android:textSize="30sp"
+            android:id="@+id/gerenxinxi_tv_touxiang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentRight="true"
+            android:id="@+id/gerenxinxi_iv_touxiang"
+            android:layout_width="50sp"
+            android:layout_height="50sp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl2"
+        android:layout_below="@+id/rl1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="用户名"
+            android:textSize="30sp"
+            android:id="@+id/gerenxinxi_tv_yonghuming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentRight="true"
+            android:id="@+id/gerenxinxi_tv_yhm"
+            android:text="用户名"
+            android:textSize="25sp"
+            android:textColor="#999999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl3"
+        android:layout_below="@+id/rl2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="昵称"
+            android:textSize="30sp"
+            android:id="@+id/gerenxinxi_tv_nicheng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentRight="true"
+            android:id="@+id/gerenxinxi_tv_nc"
+            android:text="昵称"
+            android:textSize="25sp"
+            android:textColor="#999999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl4"
+        android:layout_below="@+id/rl3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="性别"
+            android:textSize="30sp"
+            android:id="@+id/gerenxinxi_tv_xingbie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentRight="true"
+            android:id="@+id/gerenxinxi_tv_xb"
+            android:text="性别"
+            android:textSize="25sp"
+            android:textColor="#999999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl5"
+        android:layout_below="@+id/rl4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="出生日期"
+            android:textSize="30sp"
+            android:id="@+id/gerenxinxi_tv_chushengriqi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentRight="true"
+            android:id="@+id/gerenxinxi_tv_csrq"
+            android:text="出生日期"
+            android:textSize="25sp"
+            android:textColor="#999999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</RelativeLayout>
