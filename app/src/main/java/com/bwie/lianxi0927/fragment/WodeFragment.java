@@ -63,7 +63,6 @@ public class WodeFragment extends Fragment {
         tv_login_zhuce = view.findViewById(R.id.tv_login_zhuce);
         int anInt = getActivity().getSharedPreferences("con", MODE_PRIVATE).getInt("uid", 0);
         if(anInt!=0){
-
             OkHttpClient client = new OkHttpClient();
             FormBody.Builder builder = new FormBody.Builder();
             FormBody build = builder.build();

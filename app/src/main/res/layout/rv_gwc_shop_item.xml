@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5sp"
+    android:layout_height="80sp">
+
+    <CheckBox
+        android:id="@+id/cb_shop"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="5sp"
+        android:button="@drawable/checkbox_style"
+        android:padding="5dp"
+        android:paddingLeft="10dp" />
+
+    <ImageView
+        android:id="@+id/iv_gwc_shop_img"
+        android:layout_width="80sp"
+        android:layout_height="80sp"
+        android:layout_alignLeft="@+id/cb_shop"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher" />
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="80sp">
+        <TextView
+            android:id="@+id/tv_shop_title"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textSize="13sp"
+            android:text="ssssssssss"
+            android:textColor="#333333"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="12sp"
+            android:layout_below="@+id/tv_shop_title"
+            android:id="@+id/tv_shop_subhead"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="ssssssssss"
+            android:textColor="#666666"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <TextView
+                android:id="@+id/tv_shop_price"
+                android:text="ssssss"
+                android:textColor="#ff0000"
+                android:layout_marginBottom="5sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <com.bwie.lianxi0927.AmountView
+                android:id="@+id/jiajianqi"
+                android:layout_marginBottom="5sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10sp"
+                android:layout_width="wrap_content"
+                app:btnTextSize="14sp"
+                app:btnWidth="36sp"
+                app:tvWidth="30sp"
+                android:layout_height="25sp"></com.bwie.lianxi0927.AmountView>
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

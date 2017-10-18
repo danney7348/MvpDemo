@@ -19,4 +19,6 @@ public class Api {
     public static final String SOUSUO_API = "http://120.27.23.105/product/searchProducts?keywords=";
     public static final String PRODUCTDETAIL_API = "http://120.27.23.105/product/getProductDetail?pid=";
     public static final String PRODUCTSL_API = "http://120.27.23.105/product/getProducts?pscid=";
+    public static final String ADDCAR_API = "http://120.27.23.105/product/addCart?uid=";
+    public static final String GETCARTS_API = "http://120.27.23.105/product/getCarts?uid=";
 }

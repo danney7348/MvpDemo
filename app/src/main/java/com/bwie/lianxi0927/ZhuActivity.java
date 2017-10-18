@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bwie.lianxi0927.fragment.FenleiFragment;
+import com.bwie.lianxi0927.fragment.GouWuCheFragment;
 import com.bwie.lianxi0927.fragment.ShouyeFragment;
 import com.bwie.lianxi0927.fragment.WodeFragment;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -90,7 +91,7 @@ public class ZhuActivity extends AppCompatActivity implements View.OnClickListen
                 img_gouwu.setImageResource(R.drawable.gouwuche2);
                 img_wode.setImageResource(R.drawable.wode1);
                 img_fenlei.setImageResource(R.drawable.fenlei1);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl,new ShouyeFragment( )).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl,new GouWuCheFragment()).commit();
                 break;
             case R.id.m_wode:
                 img_shouye.setImageResource(R.drawable.shouye1);

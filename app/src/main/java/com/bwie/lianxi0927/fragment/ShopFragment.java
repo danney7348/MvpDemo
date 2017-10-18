@@ -67,29 +67,32 @@ public class ShopFragment extends android.support.v4.app.Fragment implements Pro
     @Override
     public void onProductXiangqingSuccess(final PruductXiangqing.DataBean data1) {
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                imgesUrl = new ArrayList<>();
-                String images = data1.getImages();
-                final String[] split = images.split("\\|");
-                for (int i = 0; i < split.length; i++) {
-                    String s = split[i];
-                    imgesUrl.add(s);
-                }
-                banner.setData(imgesUrl,null);
-                banner.setPoinstPosition(XBanner.RIGHT);
-                banner.setmAdapter(new XBanner.XBannerAdapter() {
-                    @Override
-                    public void loadBanner(XBanner banner, View view, int position) {
-                        Glide.with(getContext()).load(split[0]).into((ImageView) view);
+        if(getActivity()!=null){
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    imgesUrl = new ArrayList<>();
+                    String images = data1.getImages();
+                    final String[] split = images.split("\\|");
+                    for (int i = 0; i < split.length; i++) {
+                        String s = split[i];
+                        imgesUrl.add(s);
                     }
-                });
-                System.out.println("data1.getTitle() = " + data1.getTitle());
-                title.setText(data1.getTitle());
-                price.setText(data1.getPrice()+"");
-            }
-        });
+                    banner.setData(imgesUrl,null);
+                    banner.setPoinstPosition(XBanner.RIGHT);
+                    banner.setmAdapter(new XBanner.XBannerAdapter() {
+                        @Override
+                        public void loadBanner(XBanner banner, View view, int position) {
+                            Glide.with(getContext()).load(split[0]).into((ImageView) view);
+                        }
+                    });
+                    System.out.println("data1.getTitle() = " + data1.getTitle());
+                    title.setText(data1.getTitle());
+                    price.setText(data1.getPrice()+"");
+                }
+            });
+        }
+
     }
 
     @Override
