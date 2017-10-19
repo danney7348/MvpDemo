@@ -6,11 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.bwie.lianxi0927.R;
 import com.bwie.lianxi0927.bean.GetCartsData;
+import com.bwie.lianxi0927.presenter.OnUpdateCartsPresenter;
+import com.bwie.lianxi0927.view.UpdateCartsView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +24,7 @@ import java.util.List;
  * 类的用途：
  */
 
-public class RecyclerViewGouwucheAdapter extends RecyclerView.Adapter<RecyclerViewGouwucheAdapter.ViewHolder>{
+public class RecyclerViewGouwucheAdapter extends RecyclerView.Adapter<RecyclerViewGouwucheAdapter.ViewHolder> implements UpdateCartsView {
 
     private Context context;
     private List<GetCartsData.DataBean> list;
@@ -38,9 +42,35 @@ public class RecyclerViewGouwucheAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.title.setText(list.get(position).getSellerName());
-        holder.cb_shangjia.setChecked(false);
+        final OnUpdateCartsPresenter presenter = new OnUpdateCartsPresenter(context,this);
+        /*holder.cb_shangjia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+
+                    int selected = list.get(position).getList().get(position).getSelected();
+                    System.out.println("selected = " + selected);
+                    selected=0;
+                    if(selected==0){
+                        holder.cb_shangjia.setChecked(true);
+                    }
+                    System.out.println("selected = " + selected);
+                    int uid = context.getSharedPreferences("con", Context.MODE_PRIVATE).getInt("uid", 170);
+                    presenter.requestUpdateCarts(uid,list.get(position).getList().get(position).getSellerid(),list.get(position).getList().get(position).getPid(),selected,list.get(position).getList().get(position).getNum());
+                }else {
+                    holder.cb_shangjia.setChecked(false);
+                    int selected = list.get(position).getList().get(position).getSelected();
+                    System.out.println("selected = " + selected);
+                    selected=1;
+                    System.out.println("selected = " + selected);
+                    int uid = context.getSharedPreferences("con", Context.MODE_PRIVATE).getInt("uid", 170);
+                    presenter.requestUpdateCarts(uid,list.get(position).getList().get(position).getSellerid(),list.get(position).getList().get(position).getPid(),selected,list.get(position).getList().get(position).getNum());
+
+                }
+            }
+        });*/
         LinearLayoutManager manager = new LinearLayoutManager(context);
         holder.rv_gwc_shop.setLayoutManager(manager);
         MyGouwucheShopAdapter adapter = new MyGouwucheShopAdapter(context,list.get(position).getList());
@@ -50,6 +80,21 @@ public class RecyclerViewGouwucheAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    @Override
+    public void onUpdateCartsDataSuccess(String msg) {
+
+    }
+
+    @Override
+    public void onUpdateCartsDataFilure(String msg) {
+
+    }
+
+    @Override
+    public void failure() {
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -142,26 +142,37 @@
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:background="@drawable/ed_black"
-                    android:text="18" />
+                    android:text="00" />
+                <TextView
+                    android:textSize="20sp"
+                    android:textColor="#333333"
+                    android:text=":"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <TextView
-                    android:layout_marginLeft="5sp"
+                    android:layout_marginLeft="1sp"
                     android:id="@+id/tv_minute"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:background="@drawable/ed_black"
                     android:gravity="center"
-                    android:text="26"
+                    android:text="00"
                     android:textColor="#ffffff" />
-
                 <TextView
-                    android:layout_marginLeft="5sp"
+                    android:textSize="20sp"
+                    android:textColor="#333333"
+                    android:text=":"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginLeft="1sp"
                     android:id="@+id/tv_second"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:background="@drawable/ed_black"
                     android:gravity="center"
-                    android:text="26"
+                    android:text="00"
                     android:textColor="#ffffff" />
             </LinearLayout>
 

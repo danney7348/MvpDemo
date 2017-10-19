@@ -21,4 +21,11 @@ public class Api {
     public static final String PRODUCTSL_API = "http://120.27.23.105/product/getProducts?pscid=";
     public static final String ADDCAR_API = "http://120.27.23.105/product/addCart?uid=";
     public static final String GETCARTS_API = "http://120.27.23.105/product/getCarts?uid=";
+    public static final String UPDATECARTS_API = "http://120.27.23.105/product/updateCarts?uid=";
+    public static final String ADDADDR_API = "http://120.27.23.105/user/addAddr?uid=";
+    public static final String GETADDRS_API = "http://120.27.23.105/user/addAddr?uid=";
+    public static final String GETDEFAULTADDR_API = "http://120.27.23.105/user/getDefaultAddr?uid=";
+    public static final String SETADDR_API = "http://120.27.23.105/user/setAddr?uid=";
+    public static final String UPDATEADDR_API = "http://120.27.23.105/user/updateAddr?uid=71&addrid=2";
+    public static final String GETORDERS_API = "http://120.27.23.105/product/getOrders?uid=";
 }

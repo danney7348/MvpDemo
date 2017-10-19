@@ -19,6 +19,7 @@ import com.bwie.lianxi0927.bean.GetCartsData;
 import com.bwie.lianxi0927.presenter.GetCartsPresenter;
 import com.bwie.lianxi0927.view.GetCartsView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -68,10 +69,24 @@ public class GouWuCheFragment extends Fragment implements GetCartsView {
         if(getActivity()!=null){
             getActivity().runOnUiThread(new Runnable() {
 
-                private List<GetCartsData.DataBean.ListBean> list;
+                private int selected;
+                private List<GetCartsData.DataBean.ListBean> list = new ArrayList<GetCartsData.DataBean.ListBean>();
 
                 @Override
                 public void run() {
+                    for (int i = 0; i < list.size(); i++) {
+                        selected = list.get(i).getSelected();
+                    }
+                    if(selected ==0){
+                        int sum = 0;
+                        for (int i = 0; i < list.size(); i++) {
+                            double bargainPrice = list.get(i).getBargainPrice();
+                            sum+=bargainPrice;
+                            System.out.println("bargainPrice = " + bargainPrice);
+                        }
+                        System.out.println("sum = " + sum);
+                        sumprice.setText("合计：￥"+sum+"");
+                    }
                     LinearLayoutManager manager = new LinearLayoutManager(getContext());
                     rc_gouwuche.setLayoutManager(manager);
                     RecyclerViewGouwucheAdapter adapter = new RecyclerViewGouwucheAdapter(getActivity(),data1);
