@@ -28,4 +28,6 @@ public class Api {
     public static final String SETADDR_API = "http://120.27.23.105/user/setAddr?uid=";
     public static final String UPDATEADDR_API = "http://120.27.23.105/user/updateAddr?uid=71&addrid=2";
     public static final String GETORDERS_API = "http://120.27.23.105/product/getOrders?uid=";
+    public static final String DELETECART_API = "http://120.27.23.105/product/deleteCart?uid=";
+    public static final String CREATEORDER_API = "http://120.27.23.105/product/createOrder?uid=";
 }

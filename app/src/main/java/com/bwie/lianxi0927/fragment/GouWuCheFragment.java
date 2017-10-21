@@ -12,12 +12,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bwie.lianxi0927.R;
 import com.bwie.lianxi0927.adapter.RecyclerViewGouwucheAdapter;
 import com.bwie.lianxi0927.bean.GetCartsData;
+import com.bwie.lianxi0927.presenter.CreateOrderPresenter;
+import com.bwie.lianxi0927.presenter.GetAddrsPresenter;
 import com.bwie.lianxi0927.presenter.GetCartsPresenter;
+import com.bwie.lianxi0927.presenter.OnUpdateCartsPresenter;
+import com.bwie.lianxi0927.view.CreateOrderView;
 import com.bwie.lianxi0927.view.GetCartsView;
+import com.bwie.lianxi0927.view.UpdateCartsView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +35,19 @@ import java.util.List;
  * 类的用途：
  */
 
-public class GouWuCheFragment extends Fragment implements GetCartsView {
+public class GouWuCheFragment extends Fragment implements GetCartsView, UpdateCartsView, CreateOrderView {
 
     private View view;
     private Button pay;
     private TextView sumprice;
-    private CheckBox allselect;
+    private static CheckBox allselect;
     private TextView bianji;
     private RecyclerView rc_gouwuche;
+    private RecyclerViewGouwucheAdapter adapter;
+    private OnUpdateCartsPresenter presenter1;
+    private int uid;
+    private CreateOrderPresenter presenter2;
+    private GetCartsPresenter presenter;
 
     @Nullable
     @Override
@@ -48,13 +59,21 @@ public class GouWuCheFragment extends Fragment implements GetCartsView {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         initView();
         initData();
     }
+    public static void setAllSelect(boolean b){
+        allselect.setChecked(b);
+    }
     private void initData() {
-        GetCartsPresenter presenter = new GetCartsPresenter(getContext(),this);
-        int uid = getActivity().getSharedPreferences("con", Context.MODE_PRIVATE).getInt("uid", 170);
+        presenter2 = new CreateOrderPresenter(getActivity(), this);
+        presenter = new GetCartsPresenter(getContext(),this);
+        uid = getActivity().getSharedPreferences("con", Context.MODE_PRIVATE).getInt("uid", 170);
         presenter.requestCarts(uid);
+        presenter1 = new OnUpdateCartsPresenter(getContext(), this);
+
+
     }
     private void initView() {
         pay = view.findViewById(R.id.pay);
@@ -68,33 +87,74 @@ public class GouWuCheFragment extends Fragment implements GetCartsView {
     public void getCartsDataSussess(final List<GetCartsData.DataBean> data1) {
         if(getActivity()!=null){
             getActivity().runOnUiThread(new Runnable() {
-
                 private int selected;
                 private List<GetCartsData.DataBean.ListBean> list = new ArrayList<GetCartsData.DataBean.ListBean>();
-
                 @Override
                 public void run() {
-                    for (int i = 0; i < list.size(); i++) {
-                        selected = list.get(i).getSelected();
-                    }
-                    if(selected ==0){
-                        int sum = 0;
-                        for (int i = 0; i < list.size(); i++) {
-                            double bargainPrice = list.get(i).getBargainPrice();
-                            sum+=bargainPrice;
-                            System.out.println("bargainPrice = " + bargainPrice);
-                        }
-                        System.out.println("sum = " + sum);
-                        sumprice.setText("合计：￥"+sum+"");
-                    }
+                    System.out.println("data1 ========== " + data1.size());
                     LinearLayoutManager manager = new LinearLayoutManager(getContext());
                     rc_gouwuche.setLayoutManager(manager);
-                    RecyclerViewGouwucheAdapter adapter = new RecyclerViewGouwucheAdapter(getActivity(),data1);
+                    adapter = new RecyclerViewGouwucheAdapter(getActivity(),data1);
                     rc_gouwuche.setAdapter(adapter);
+                    pay.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+                            double sum = 0;
+                            for (int i = 0; i < data1.size(); i++) {
+                                for (int i1 = 0; i1 < data1.get(i).getList().size(); i1++) {
+                                    GetCartsData.DataBean.ListBean listBean = data1.get(i).getList().get(i1);
+                                    presenter1.requestUpdateCarts(getActivity().getSharedPreferences("con",Context.MODE_PRIVATE).getInt("uid",170),listBean.getSellerid()+"",listBean.getPid(),1,listBean.getNum());
+                                    if(listBean.getSelected()==1){
+                                        sum +=listBean.getBargainPrice()*listBean.getNum();
+                                        System.out.println("sum = " + sum);
+                                    }
+                                }
+                            }
+                            presenter2.requestCreateOrder(uid,sum);
+                            sumprice.setText("总价"+sum+"");
+                        }
+                    });
+                    allselect.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (allselect.isChecked()){
+                                List<Boolean> allSelect = adapter.getAllSelect();
+                                System.out.println("allSelect.size() = " + allSelect.size());
+                                    Toast.makeText(getContext(), allSelect.size()+"", Toast.LENGTH_SHORT).show();
+                                    for (int i = 0; i < allSelect.size(); i++) {
+                                        allSelect.set(i,true);
+                                        System.out.println("allSelect.get(i).booleanValue()+\"\" = " + allSelect.get(i).booleanValue()+"");
+                                    }
+                                    rc_gouwuche.setAdapter(adapter);
+                                for (int i = 0; i < data1.size(); i++) {
+
+                                    for (int i1 = 0; i1 < data1.get(i).getList().size(); i1++) {
+
+                                        presenter1.requestUpdateCarts(uid,data1.get(i).getSellerid()+"",data1.get(i).getList().get(i1).getPid(),1,data1.get(i).getList().get(i1).getNum());
+                                    }
+                                }
+                                }else {
+                                List<Boolean> allSelect = adapter.getAllSelect();
+                                System.out.println("allSelect.size() = " + allSelect.size());
+                                Toast.makeText(getContext(), allSelect.size()+"", Toast.LENGTH_SHORT).show();
+                                for (int i = 0; i < allSelect.size(); i++) {
+                                    allSelect.set(i,false);
+                                    System.out.println("allSelect.get(i).booleanValue()+\"\" = " + allSelect.get(i).booleanValue()+"");
+                                }
+                                rc_gouwuche.setAdapter(adapter);
+                                for (int i = 0; i < data1.size(); i++) {
+
+                                    for (int i1 = 0; i1 < data1.get(i).getList().size(); i1++) {
+                                        presenter1.requestUpdateCarts(uid,data1.get(i).getSellerid()+"",data1.get(i).getList().get(i1).getPid(),0,data1.get(i).getList().get(i1).getNum());
+                                    }
+                                }
+                            }
+                        }
+                    });
                 }
             });
         }
-
     }
 
     @Override
@@ -103,7 +163,43 @@ public class GouWuCheFragment extends Fragment implements GetCartsView {
     }
 
     @Override
+    public void onUpdateCartsDataSuccess(String msg) {
+
+    }
+
+    @Override
+    public void onUpdateCartsDataFilure(String msg) {
+
+    }
+
+    @Override
     public void failure() {
+
+    }
+
+    @Override
+    public void onCreateOrderSuccess(final String msg) {
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onCreateOrderFailure(final String msg) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onFailure() {
 
     }
 }

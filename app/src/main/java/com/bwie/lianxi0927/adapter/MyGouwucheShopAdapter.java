@@ -17,6 +17,7 @@ import com.bwie.lianxi0927.bean.GetCartsData;
 import com.bwie.lianxi0927.presenter.OnUpdateCartsPresenter;
 import com.bwie.lianxi0927.view.UpdateCartsView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,15 +30,22 @@ import java.util.List;
 public class MyGouwucheShopAdapter extends RecyclerView.Adapter<MyGouwucheShopAdapter.ViewHolder> implements UpdateCartsView {
     private Context context;
     private List<GetCartsData.DataBean.ListBean> list;
+    private View view;
+    private CheckBox checkbox;
+    private int size;
+    private int lin;
 
-    public MyGouwucheShopAdapter(Context context, List<GetCartsData.DataBean.ListBean> list) {
+    public MyGouwucheShopAdapter(Context context, List<GetCartsData.DataBean.ListBean> list,CheckBox checkBox) {
         this.context = context;
         this.list = list;
+        checkbox = checkBox;
+        size = list.size();
+        lin = 0;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.rv_gwc_shop_item,null);
+        view = View.inflate(context, R.layout.rv_gwc_shop_item,null);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -45,36 +53,74 @@ public class MyGouwucheShopAdapter extends RecyclerView.Adapter<MyGouwucheShopAd
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final OnUpdateCartsPresenter presenter = new OnUpdateCartsPresenter(context,this);
-        //holder.cb_shop.setChecked(false);
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                onItemClickListener.onItemClickListener(position,view);
+                return false;
+            }
+        });
         holder.tv_shop_price.setText("￥"+list.get(position).getBargainPrice()+"");
         holder.tv_shop_subhead.setText(list.get(position).getSubhead());
         holder.tv_shop_title.setText(list.get(position).getTitle());
         System.out.println("holder = " + list.get(position).getNum()+"");
         holder.jiajianqi.setGoods_storage(50);
         holder.jiajianqi.setnum(list.get(position).getNum());
-        if (list.get(position).getSelected()==0){
+        if (list.get(position).getSelected()==1){
             holder.cb_shop.setChecked(true);
             System.out.println("list = " + list.get(position).getSelected());
-        }else if(list.get(position).getSelected()==1){
+        }else if(list.get(position).getSelected()==0){
             holder.cb_shop.setChecked(false);
             System.out.println("list = " + list.get(position).getSelected());
         }
-        holder.cb_shop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                onItemClickListener.onItemClickListener(position,view);
+                return false;
+            }
+        });
+        /*holder.cb_shop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             private int selected;
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b==true){
-                    selected = 0;
+                    selected = 1;
                     System.out.println("list = " + list.get(position).getSelected());
                 }else {
-                    selected = 1;
+                    selected = 0;
                     System.out.println("list = " + list.get(position).getSelected());
                 }
                 int uid = context.getSharedPreferences("con", Context.MODE_PRIVATE).getInt("uid", 170);
-                presenter.requestUpdateCarts(uid,list.get(position).getSellerid(),list.get(position).getPid(),selected,list.get(position).getNum());
+                presenter.requestUpdateCarts(uid,list.get(position).getSellerid()+"",list.get(position).getPid(),selected,list.get(position).getNum());
+            }
+        });*/
+        holder.cb_shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(holder.cb_shop.isChecked()){
+                    lin= lin+1;
+                    holder.cb_shop.setChecked(true);
+                    if(lin>size){
+                        lin = size;
+                    }
+                    if(lin==size){
+                        checkbox.setChecked(true);
+                        upDateAdapter.onUpdateAdapterTrue();
+                    }
+                    list.get(position).setSelected(1);
+                    presenter.requestUpdateCarts(context.getSharedPreferences("con",Context.MODE_PRIVATE).getInt("uid",170),list.get(position).getSellerid()+"",list.get(position).getPid(),1,list.get(position).getNum());
+                }else {
+                    lin--;
+                    checkbox.setChecked(false);
+                    list.get(position).setSelected(0);
+                    holder.cb_shop.setChecked(false);
+                    upDateAdapter.onUpdateAdapterFalse();
+                    presenter.requestUpdateCarts(context.getSharedPreferences("con",Context.MODE_PRIVATE).getInt("uid",170),list.get(position).getSellerid()+"",list.get(position).getPid(),0,list.get(position).getNum());
 
+                }
             }
         });
         holder.jiajianqi.setOnAmountChangeListener(new AmountView.OnAmountChangeListener() {
@@ -82,7 +128,7 @@ public class MyGouwucheShopAdapter extends RecyclerView.Adapter<MyGouwucheShopAd
             public void onAmountChange(View view, int amount) {
                 Toast.makeText(context, "Amount=>  " + amount, Toast.LENGTH_SHORT).show();
                 int uid = context.getSharedPreferences("con", Context.MODE_PRIVATE).getInt("uid", 170);
-                presenter.requestUpdateCarts(uid,list.get(position).getSellerid(),list.get(position).getPid(),list.get(position).getSelected(),amount);
+                presenter.requestUpdateCarts(uid,list.get(position).getSellerid()+"",list.get(position).getPid(),list.get(position).getSelected(),amount);
             }
         });
         Glide.with(context).load(list.get(position).getImages().split("\\|")[0]).into(holder.iv_gwc_shop_img);
@@ -109,6 +155,7 @@ public class MyGouwucheShopAdapter extends RecyclerView.Adapter<MyGouwucheShopAd
 
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private final CheckBox cb_shop;
@@ -127,5 +174,24 @@ public class MyGouwucheShopAdapter extends RecyclerView.Adapter<MyGouwucheShopAd
             tv_shop_title = itemView.findViewById(R.id.tv_shop_title);
             jiajianqi = itemView.findViewById(R.id.jiajianqi);
         }
+    }
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener{
+        void onItemClickListener(int pos,View view);
+    }
+    private UpDateAdapter upDateAdapter;
+
+    public void setUpDateAdapter(UpDateAdapter upDateAdapter) {
+        this.upDateAdapter = upDateAdapter;
+    }
+
+    public interface UpDateAdapter{
+        void onUpdateAdapterTrue();
+        void onUpdateAdapterFalse();
     }
 }

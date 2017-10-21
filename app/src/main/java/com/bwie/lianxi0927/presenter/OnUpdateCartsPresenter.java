@@ -24,7 +24,7 @@ public class OnUpdateCartsPresenter implements UpdateCartsModel.OnUpdateCarts {
         updateCartsModel.setOnUpdateCarts(this);
     }
 
-    public void requestUpdateCarts(int uid,int sellerid,int pid,int selected,int num){
+    public void requestUpdateCarts(int uid,String sellerid,int pid,int selected,int num){
         updateCartsModel.onUpdateCartsData(uid,sellerid,pid,selected,num);
     }
     @Override

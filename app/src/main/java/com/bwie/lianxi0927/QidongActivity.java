@@ -18,7 +18,7 @@ public class QidongActivity extends AppCompatActivity {
 
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
-            int num = 3;
+            int num = 1;
             @Override
             public void run() {
                 num--;

@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 public class UpdateCartsModel {
     //uid=170&sellerid=15&pid=38&selected=1&num=10
-    public void onUpdateCartsData(int uid,int sellerid,int pid,int selected,int num){
+    public void onUpdateCartsData(int uid,String sellerid,int pid,int selected,int num){
         HttpUtils utils = new HttpUtils();
         utils.getJson(Api.UPDATECARTS_API + uid + "&&sellerid=" + sellerid + "&&pid=" + pid + "&&selected=" + selected + "&&num=" + num, new HttpUtils.HttpCallBack() {
             @Override
@@ -24,11 +24,14 @@ public class UpdateCartsModel {
                 UpdateCarts updateCarts = gson.fromJson(data, UpdateCarts.class);
                 String code = updateCarts.getCode();
                 String msg = updateCarts.getMsg();
-                if (code.equals("0")){
-                    onUpdateCarts.onUpdateCartsDataSuccess(msg);
-                }else if(code.equals("1")){
-                    onUpdateCarts.onUpdateCartsDataFilure(msg);
+                if(code!=null){
+                    if (code.equals("0")){
+                        onUpdateCarts.onUpdateCartsDataSuccess(msg);
+                    }else if(code.equals("1")){
+                        onUpdateCarts.onUpdateCartsDataFilure(msg);
+                    }
                 }
+
             }
         });
     }
