@@ -11,13 +11,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-
     <application
         android:name=".MyApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/w5"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/w5"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".QidongActivity">
@@ -60,7 +59,16 @@
         <activity android:name=".GerenxinxiActivity" />
         <activity android:name=".NicknameActivity" />
         <activity android:name=".SouActivity" />
-        <activity android:name=".ProdutctsXiangqingActivity"></activity>
+        <activity android:name=".ProdutctsXiangqingActivity" />
+        <activity android:name=".OrdersActivity"></activity>
+        <activity android:name=".zhifubao.PayDemoActivity"></activity>
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
     </application>
 
 </manifest>

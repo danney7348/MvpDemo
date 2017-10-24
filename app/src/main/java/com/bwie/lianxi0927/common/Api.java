@@ -30,4 +30,5 @@ public class Api {
     public static final String GETORDERS_API = "http://120.27.23.105/product/getOrders?uid=";
     public static final String DELETECART_API = "http://120.27.23.105/product/deleteCart?uid=";
     public static final String CREATEORDER_API = "http://120.27.23.105/product/createOrder?uid=";
+    public static final String UPDATEORDER = "http://120.27.23.105/product/updateOrder?uid=";
 }

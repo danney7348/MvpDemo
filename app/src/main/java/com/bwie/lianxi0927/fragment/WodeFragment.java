@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bwie.lianxi0927.MainActivity;
+import com.bwie.lianxi0927.OrdersActivity;
 import com.bwie.lianxi0927.R;
 import com.bwie.lianxi0927.ZhanghuShezhiActivity;
 import com.bwie.lianxi0927.bean.UserLogin;
@@ -46,6 +47,7 @@ public class WodeFragment extends Fragment {
     private SharedPreferences sp;
     private ImageView iv;
     private TextView tv_login_zhuce;
+    private TextView wodedingdan;
 
     @Nullable
     @Override
@@ -61,6 +63,14 @@ public class WodeFragment extends Fragment {
         LinearLayout login = view.findViewById(R.id.ll_login);
         iv = view.findViewById(R.id.imageView);
         tv_login_zhuce = view.findViewById(R.id.tv_login_zhuce);
+        wodedingdan = view.findViewById(R.id.tv_wodedingdan);
+        wodedingdan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), OrdersActivity.class);
+                startActivity(intent);
+            }
+        });
         int anInt = getActivity().getSharedPreferences("con", MODE_PRIVATE).getInt("uid", 0);
         if(anInt!=0){
             OkHttpClient client = new OkHttpClient();
@@ -96,7 +106,6 @@ public class WodeFragment extends Fragment {
                             e.printStackTrace();
                         }
                     }
-
                 }
             });
 

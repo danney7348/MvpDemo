@@ -174,12 +174,17 @@ public class RecyclerViewGouwucheAdapter extends RecyclerView.Adapter<RecyclerVi
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Toast.makeText(context, "ssssssssss", Toast.LENGTH_SHORT).show();
                         int uid = context.getSharedPreferences("con", Context.MODE_PRIVATE).getInt("uid", 170);
-                        presenter1.requestDeleteCart(uid,list.get(position).getList().get(pos).getPid());
+                        list.get(position).getList().remove(pos);
+                        if(list.get(position).getList().size()==0){
+                            list.remove(position);
+                        }
+                        notifyDataSetChanged();
                         holder.rv_gwc_shop.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                     }
                 }).setNegativeButton("留下",null);
                 ad.show();
+                presenter1.requestDeleteCart(uid,list.get(position).getList().get(pos).getPid());
             }
         });
         holder.rv_gwc_shop.setAdapter(adapter);

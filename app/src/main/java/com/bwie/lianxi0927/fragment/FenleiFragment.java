@@ -105,11 +105,15 @@ public class FenleiFragment extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    FenleiXiangqingFragment fsf = new FenleiXiangqingFragment();
+                                    fsf.getCid(data.get(0).getCid());
+                                    getChildFragmentManager().beginTransaction().replace(R.id.fenlei_fl,fsf).commit();
                                     final List<Fenlei.DataBean> data = fenlei.getData();
                                     final List<Fragment> fragmentList = new ArrayList<>();
                                     for (int i = 0; i < data.size(); i++) {
                                         fragmentList.add(new FenleiXiangqingFragment());
                                     }
+
                                     final MyListViewAdapter adapter = new MyListViewAdapter(getActivity(),data);
                                     listView.setAdapter(adapter);
                                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

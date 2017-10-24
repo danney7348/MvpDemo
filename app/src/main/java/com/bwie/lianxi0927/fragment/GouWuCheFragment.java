@@ -18,7 +18,6 @@ import com.bwie.lianxi0927.R;
 import com.bwie.lianxi0927.adapter.RecyclerViewGouwucheAdapter;
 import com.bwie.lianxi0927.bean.GetCartsData;
 import com.bwie.lianxi0927.presenter.CreateOrderPresenter;
-import com.bwie.lianxi0927.presenter.GetAddrsPresenter;
 import com.bwie.lianxi0927.presenter.GetCartsPresenter;
 import com.bwie.lianxi0927.presenter.OnUpdateCartsPresenter;
 import com.bwie.lianxi0927.view.CreateOrderView;
@@ -113,6 +112,8 @@ public class GouWuCheFragment extends Fragment implements GetCartsView, UpdateCa
                             }
                             presenter2.requestCreateOrder(uid,sum);
                             sumprice.setText("总价"+sum+"");
+
+
                         }
                     });
                     allselect.setOnClickListener(new View.OnClickListener() {
